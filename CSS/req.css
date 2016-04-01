@@ -1,0 +1,37 @@
+#select_course{
+    border-width: 3px;
+    border-style: solid;
+    width: 33%;
+    float: left;
+    margin-left: 10%;
+    margin-top: 25px;
+    padding: 15px;
+}
+#search{
+    float: right;
+}
+input {
+    padding: 2px;
+    margin: 3px;
+
+}
+#send_req{
+    clear:both;
+    float : right;
+    vertical-align: bottom;
+}
+#sort{
+    min-width : 250px;
+    min-height : 100px;
+    margin-right: 10%;
+    margin-top: 25px;
+    padding: 15px;
+    float: right;
+    border-width: 3px;
+    border-style: solid;
+    display: none;
+}
+#table_looks{
+    float : left;
+    margin : 10px;
+}

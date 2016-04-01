@@ -1,0 +1,157 @@
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('fonts/Ubuntu.eot?#iefix') format('embedded-opentype'),  url('fonts/Ubuntu.woff') format('woff'), url('fonts/Ubuntu.ttf')  format('truetype'), url('fonts/Ubuntu.svg#Ubuntu') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+body{
+    font-family: 'Ubuntu';
+}
+#username_id {
+/*    position: absolute;*/
+    top: 200px;
+    left: 500;
+    width: 100%;
+}
+
+#password_id {
+/*    position: absolute;*/
+    top: 250px;
+    left: 500;
+    width: 100%;
+}
+
+#log_in_logo {
+/*    position: absolute;*/
+    top: 300px;
+    left: 645;
+}
+
+hr {
+
+    display: block;
+    margin-top: 100;
+    margin-left: 350;
+    margin-right: 250;
+    border-style: inset;
+    border-width: 1px;
+}
+
+#text_ask_sign_up {
+    text-align: center;
+    font-size:small;
+}
+
+#profil_image {
+/*    position: absolute;*/
+    top: 450px;
+    left: 350;
+    width: 100;
+    height: 100;
+}
+
+#first_name {
+/*    position: absolute;*/
+    top: 460px;
+    left: 450;
+    width:48%;
+float: left;}
+
+#last_name {
+/*    position: absolute;*/
+    top: 460px;
+    left: 650;
+    width:48%;
+    float: right
+}
+#email_aub_id {
+/*    position: absolute;*/
+    top: 490px;
+    left: 450;
+/*    width: 375;*/
+}
+form {
+    width: 100%;
+}
+#password_sign_up {
+/*    position: absolute;*/
+    top: 520px;
+    left: 450;
+    width:48%;
+    float: left
+}
+
+#password_sign_up_confirm {
+/*    position: absolute;*/
+    top: 550px;
+    left: 450;
+    width:48%;
+    float: right
+}
+
+#bday_id {
+/*    position: absolute;*/
+    top: 580px;
+    left: 450;
+}
+
+#sign_up_botton {
+/*    position: absolute;*/
+    top: 620px;
+    left: 610;
+}
+
+.field{
+margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center
+}
+
+h1{
+margin-bottom: 25px;
+    font-family: 'Ubuntu';
+    color:#000;
+    text-align: center
+}
+header {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 60px;
+}
+.SubmitHolder{
+text-align: center;
+    padding-top: 10px
+}
+.field input[type="text"],.field input[type="password"],.field input[type="date"]{
+    width: 100%;
+}
+
+#text_ask_sign_up{
+display: inline-block;
+    left: 155px;
+    position: absolute;
+    text-align: center;
+    top: -26px;
+}
+
+.formContainer {
+    margin: 0 auto;
+    padding: 20px;
+    width: 370px;
+}
+
+.logo {
+    float: left;
+    width: 150px;
+}
+.logo img{
+width: 100%
+}
+
+header > h1 {
+    float: left;
+    font-size: 40px;
+    margin-left: 0;
+    padding-top: 70px;
+    color:rgb(0,42,90)
+}
