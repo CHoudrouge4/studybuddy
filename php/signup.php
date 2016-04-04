@@ -7,13 +7,10 @@
     $pass = "study_buddy_choudrouge4";// enter ur database password.
     $dname = "study_buddy";
     $connection = mysqli_connect($host,$dbuser,$pass,$dname);
-    echo "1";
     //$con = mysqli_connect($host,$dbuser, $pass, $dname);
     if(mysqli_connect_errno()) {
-        echo "2";
         die("Connection Failed!" . mysqli_connect_error());
     }
-    echo "3";
 
 ?>
 <html>
