@@ -1,4 +1,6 @@
 <?php
+
+
     /*
     * @param: string name
     * @return true if the name validate the following condition else otherwize
@@ -83,19 +85,17 @@
        } else if (!$password_confirmation) {
             $errorMsg = "Please confirm your password";
        } else if ($password != $password_confirmation) {
-           $errorMsg = "Password did not match! please try aggain";
+           $errorMsg = "Password did not match! please try again";
        } else {
+
+           //include "./mail_confirmation.php";
+        //   header('Location: ./mail_confirmation.php');
+        //   echo "before confirmation";
+
           require './php/signup.php';
-    //        header('Location: ./signup.php');
+
           exit;
        }
-            // send email and redirect
-        /*    $to = "feedback@example.com";
-            if(!$subject) $subject = "Contact from website";
-            $headers = "From: webmaster@example.com" . "\r\n";
-            mail($to, $subject, $message, $headers);
-            header("Location: http://www.example.com/thankyou.html");
-           // exit;
-           return;*/
+
     }
 ?>

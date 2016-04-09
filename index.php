@@ -45,12 +45,9 @@
                     <div class="formContainer">
                         <p id = "text_ask_sign_up"> Don't have an account ? Sign up </p>
                     <h1>Sign Up</h1>
-<!--        <img src = "./Image/sign_up.png" alt="sign up" style="width:204px;height:128px;">-->
-                    <form method = "POSt" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" accept-charset="UTF-8">
-<!--
-            <div class="field"><input id = "profil_image" type="image" src="./Image/personel.png" alt="Submit"
-                        width="48" height="48"></div>
--->
+
+                    <form method = "POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" accept-charset="UTF-8">
+
                         <?php
                             if(isset($errorMsg) && $errorMsg) {
                                 echo "<p style=\"color: red;\">*",htmlspecialchars($errorMsg),"</p>\n\n";
