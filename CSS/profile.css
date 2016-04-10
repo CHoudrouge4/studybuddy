@@ -11,6 +11,8 @@ a:visited {
     width: 100;
     height: 100;
 }
+    .hiddenContent {display: none;}
+    .visibleContent {display: block;}​
 #info_p{
     float: left;
     padding: 30px;
@@ -26,7 +28,9 @@ a:visited {
     font-size:large;
 
 }
-
+.hide{
+    display: none;
+}
 #sign_out {
     position: absolute;
     top: 40;

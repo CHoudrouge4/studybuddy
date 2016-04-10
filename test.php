@@ -1,96 +1,222 @@
 <?php
 
-  $fp = fsockopen('127.0.0.1', 587, $errno, $errstr, 5);
-  if (!$fp) {
-    echo "port is closed";
-  } else {
-    echo "port is open";  // port is open and available
-  //  fclose($fp);
-  }
-  /*/*  function confirm($email) {
-      $confirmcode = rand();
-      $message = "
-        Hello,
-        You Signed up for Studybuddy \n
-        please click in the link bellow to confirm your email.
-        http:127.0.0.1/confirmationfom.php?email=$email&code=$confirmcode;
-      ";
-      mail($email,"Studybuddy confirmation mail", "FROM ");
-    }
-  */
-  /*
-      // Pear Mail Library
-    require_once "Mail.php";
 
-    $from = '<fromaddress@gmail.com>';
-    $to = '<toaddress@yahoo.com>';
-    $subject = 'Hi!';
-    $body = "Hi,\n\nHow are you?";
-
-    $headers = array(
-        'From' => $from,
-        'To' => $to,
-        'Subject' => $subject
-    );
-
-    $smtp = Mail::factory('smtp', array(
-            'host' => 'ssl://smtp.gmail.com',
-            'port' => '465',
-            'auth' => true,
-            'username' => 'johndoe@gmail.com',
-            'password' => 'passwordxxx'
-        ));
-
-    $mail = $smtp->send($to, $headers, $body);
-
-    if (PEAR::isError($mail)) {
-        echo('<p>' . $mail->getMessage() . '</p>');
-    } else {
-        echo('<p>Message successfully sent!</p>');
-    }*/
-  //  function send_confirm($email) {
-
-    /*  $mail = new PHPMailer;
-
-      $mail->isSMTP();                                      // Set mailer to use SMTP
-      $mail->Host = 'smtp.gmail.com';                       // Specify main and backup server
-      $mail->SMTPAuth = true;                               // Enable SMTP authentication
-      $mail->Username = 'studybuddy.confirmation@gmail.com';                   // SMTP username
-      $mail->Password = 'softwareplusplus';               // SMTP password
-      $mail->SMTPSecure = 'tls';                            // Enable encryption, 'ssl' also accepted
-      $mail->Port = 587;                                    //Set the SMTP port number - 587 for authenticated TLS
-      $mail->setFrom('studybuddy.confirmation@gmail.com', 'Studdy Buddy Team');     //Set who the message is to be sent from
-      //$mail->addReplyTo('labnol@gmail.com', 'First Last');  //Set an alternative reply-to address
-    //  $mail->addAddress($email, 'Josh Adams');  // Add a recipient
-      $mail->addAddress($email);               // Name is optional
-    //  $mail->addCC('cc@example.com');
-    //  $mail->addBCC('bcc@example.com');
-      $mail->WordWrap = 50;                                 // Set word wrap to 50 characters
-    //  $mail->addAttachment('/usr/labnol/file.doc');         // Add attachments
-    //  $mail->addAttachment('/images/image.jpg', 'new.jpg'); // Optional name
-      $mail->isHTML(true);                                  // Set email format to HTML
-
-      $mail->Subject = 'Study Buddy confirmation';
-      $mail->Body    = 'Hello,
-                        You Signed up for Studybuddy \n
-                        please click in the link bellow to confirm your email.
-                        http:127.0.0.1/confirmationfom.php?email=$email&code=$confirmcode;';
-      $mail->AltBody = 'Hello,
-                        You Signed up for Studybuddy \n
-                        please click in the link bellow to confirm your email.
-                        http:127.0.0.1/confirmationfom.php?email=$email&code=$confirmcode;';
-
-      echo "13";
-      //Read an HTML message body from an external file, convert referenced images to embedded,
-      //convert HTML into a basic plain-text alternative body
-      //$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
-
-      if(!$mail->send()) {
-         echo 'Message could not be sent.';
-         echo 'Mailer Error: ' . $mail->ErrorInfo;
-         exit;
-      }
-      echo 'Message has been sent';
-    }
-    send_confirm($email);*/
 ?>
+
+<html>
+
+          <div id="readroot_course" style="display: none">
+              <br>
+
+              <form name = "add_course" method ="POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" accept-charset="UTF-8">
+
+                    <input type="button" value="Remove review" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
+                    <br><br>
+
+                    <fieldset class = "busy">
+                    <fieldset class = "course">
+
+                        <legend class ="leg">Course: </legend>
+                        <input class = "course_busy" name = "course_name" type = "text"
+                              value="<?php if(isset($_POST["course_name"])) echo htmlspecialchars($_POST["course_name"]); ?>">
+                    </fieldset>
+
+                    <fieldset class="days">
+
+                        <legend class = "leg">Day(s) of Week</legend>
+                        <label for="monday">
+                          <input type="checkbox" class="monday" />Mo
+                        </label>
+
+                        <label for="tuesday">
+                          <input type="checkbox" class="tuesday" method = "POST" />Tu
+                        </label>
+
+                        <label for="wednesday">
+                          <input type="checkbox" class="wednesday" />We
+                        </label>
+
+                        <label for="thursday">
+                          <input type="checkbox" class="thursday" />Th
+                        </label>
+
+                        <label for="friday">
+                          <input type="checkbox" class="friday" />Fr
+                        </label>
+
+                        <label for="saturday">
+                          <input type="checkbox" class="saturday" />Sa
+                        </label>
+
+                        <label for="sunday">
+                          <input type="checkbox" class="sunday" />Su
+                        </label>
+
+                    </fieldset>
+                    <fieldset class="time">
+                        <legend class = "leg"> Time </legend>
+
+                        <label for="from">From
+                          <input class =  "time_from" type="time" name="usr_time">
+                        </label>
+
+                        <label for="to"> To
+                          <input class =  "time_to" type="time" name="usr_time">
+                        </label>
+
+                    </fieldset>
+            <!--    </form> -->
+              </fieldset>
+          </div>
+          <!--  task box  -->
+          <div id="readroot_busy" style="display: none">
+              <br>
+          <!--    <form name = "add_busy" method ="POST"> -->
+                  <input type="button" value="Remove review"
+                        onclick="this.parentNode.parentNode.removeChild(this.parentNode);" /><br><br>
+                  <fieldset class = "busy">
+                      <fieldset>
+                          <legend class ="leg">Task: </legend>
+                          <input class = "task_busy" type = "text">
+                      </fieldset>
+                      <fieldset class = "time">
+                          <legend class = "leg">Date: </legend>
+                          <input class = "date" type="date">
+                      </fieldset>
+                      <fieldset class="time">
+                          <legend class = "leg">Time </legend>
+                          <label for="from">From
+                          <input class =  "time_from" type="time" name="usr_time">
+                          </label>
+                          <label for="to"> To
+                          <input class =  "time_to" type="time" name="usr_time">
+                          </label>
+                      </fieldset>
+                  </fieldset>
+            <!--  </form> -->
+          </div>
+
+      <!--    <form name = "manage_form" method="POST" action="<?PHP/* echo htmlspecialchars($_SERVER['PHP_SELF']); ?*/?> " accept-charset="UTF-8"> -->
+
+        <!--  </form> -->
+      </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <form name = "course_and_task" method = "POST" action = "./add_courses.php">
+
+              <div id="readroot_course" style="display: none">
+                        <br>
+                <input type="button" value="Remove review" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
+                        <br><br>
+                <fieldset class = "busy">
+                    <fieldset class = "course">
+                        <legend class ="leg"> Course: </legend>
+                        <input name = "course" class = "course_busy" type ="text" >
+                    </fieldset>
+                    <fieldset class="days">
+                        <legend class = "leg">Day(s) of Week</legend>
+                        <label for="monday">
+                        <input type="checkbox" class="monday" />Mo
+                        </label>
+                        <label for="tuesday">
+                        <input type="checkbox" class="tuesday" />Tu
+                        </label>
+                        <label for="wednesday">
+                        <input type="checkbox" class="wednesday" />We
+                        </label>
+                        <label for="thursday">
+                        <input type="checkbox" class="thursday" />Th
+                        </label>
+                        <label for="friday">
+                        <input type="checkbox" class="friday" />Fr
+                        </label>
+                        <label for="saturday">
+                        <input type="checkbox" class="saturday" />Sa
+                        </label>
+                        <label for="sunday">
+                        <input type="checkbox" class="sunday" />Su
+                        </label>
+                    </fieldset>
+                    <fieldset class="time">
+                        <legend class = "leg">Time</legend>
+                        <label for="from">From
+                        <input class =  "time_from" type="time" name="usr_time">
+                        </label>
+                        <label for="to"> To
+                        <input class =  "time_to" type="time" name="usr_time">
+                        </label>
+                    </fieldset>
+                </fieldset>
+
+            </div>
+            <div id="readroot_busy" style="display: none">
+                <br>
+                    <input type="button" value="Remove review"
+                         onclick="this.parentNode.parentNode.removeChild(this.parentNode);" /><br><br>
+                    <fieldset class = "busy">
+                        <fieldset>
+                            <legend class ="leg">Task: </legend>
+                            <input class = "task_busy" type = "text">
+                        </fieldset>
+                        <fieldset class = "time">
+                            <legend class = "leg">Date: </legend>
+                            <input class = "date" type="date">
+                        </fieldset>
+                        <fieldset class="time">
+                            <legend class = "leg">Time </legend>
+                            <label for="from">From
+                            <input class =  "time_from" type="time" name="usr_time">
+                            </label>
+                            <label for="to"> To
+                            <input class =  "time_to" type="time" name="usr_time">
+                            </label>
+                        </fieldset>
+                    </fieldset>
+
+            </div>
+            <input name = "submit_forms" type="submit" value="Save form">
+      </form>
+
+              <form method="GET" action = "profile.html">
+                  <fieldset class = "full_sched">
+                      <legend id = "all_sched">Schedule</legend>
+                      <div id="" style="display: block;">
+                      </div><span id="writeroot"></span>
+                      </fieldset>
+                      <br>
+                  <input type="button" id="moreFields_course" value="Add Course"
+                  onclick="init_course()">
+                  <input type="button" id="moreFields_busy" value="Add Task"
+                  onclick="init_busy()">
+
+                  <p id = "yeah"></p>
+
+                 <br><br><br><br><br>
+              </form>
+
+
+</html>
