@@ -1,21 +1,22 @@
 <?php
   session_start();
-  require "database.php";
-  $email = $_SESSION['email'];
 
+  if(isset($_SESSION['email'])) {
+    require "database.php";
+    $email = $_SESSION['email'];
 
-  $sql = "SELECT USERID, FIRSTNAME, LASTNAME, DOB FROM USER WHERE EMAIL = '$email'";
-  $query = mysqli_query($connection, $sql);
-  $row   = mysqli_fetch_assoc($query);
+    $sql = "SELECT USERID, FIRSTNAME, LASTNAME, DOB FROM USER WHERE EMAIL = '$email'";
+    $query = mysqli_query($connection, $sql);
+    $row   = mysqli_fetch_assoc($query);
 
-  $id = $row['USERID'];
-  $first_name = $row['FIRSTNAME'];
-  $last_name = $row['LASTNAME'];
-  $dob = $row['DOB'];
+    $id = $row['USERID'];
+    $first_name = $row['FIRSTNAME'];
+    $last_name = $row['LASTNAME'];
+    $dob = $row['DOB'];
 
-  $_SESSION['firstname'] = $first_name;
-  $_SESSION['lastname'] = $last_name;
-
+    $_SESSION['firstname'] = $first_name;
+    $_SESSION['lastname'] = $last_name;
+  }
  ?>
  <!DOCTYPE>
 <html>
@@ -30,14 +31,14 @@
 
     <body onload ="load_user()">
         <?php
+
+            function test_input($data) {
+                  $data = trim($data);
+                  $data = stripslashes($data);
+                  $data = htmlspecialchars($data);
+                  return $data;
+            }
            if($_POST && isset($_POST['add_course_botton'], $_POST['course_name'], $_POST['course_number'])) {
-                  echo "1";
-                function test_input($data) {
-                   $data = trim($data);
-                   $data = stripslashes($data);
-                   $data = htmlspecialchars($data);
-                   return $data;
-                }
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   //$birth_day = test_input($_POST("bday"));
@@ -83,6 +84,34 @@
                 }
             }
 
+
+            if($_POST && isset($_POST['add_task_botton'], $_POST['task_name'], $_POST['task_date'])) {
+
+                  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    //$birth_day = test_input($_POST("bday"));
+                     $task_name = test_input($_POST["task_name"]);
+                     $task_date = test_input($_POST["task_date"]);
+                     $task_from = test_input($_POST["task_from"]);
+                     $task_to    = test_input($_POST["task_to"]);
+                  }
+
+                  if (!$task_name) {
+                        $error_task_msg = "please enter the task name";
+                  } else if(!$task_date) {
+                        $error_task_msg = "please enter the task date";
+                  } else if (!$task_from) {
+                        $error_task_msg = "please enter the task starting time";
+                  } else if (!$task_to) {
+                        echo "blablabla";
+                        $error_task_msg = "please enter the task ending time";
+                  } else {
+
+                        $add_task = "INSERT INTO BUSY (USERID , TITLE, START_FROM, END_AT, BUSYDATE) VALUES ('$id', '$task_name', '$task_from', '$task_to', '$task_date');";
+                        $res = mysqli_query($connection, $add_task);
+                        $task_smsg = "your task is added succesfully, you can add other task!!";
+                  }
+            }
+
         ?>
 
     <iframe src = "../iframe.html" frameborder = "0" width="100%" height="130"  > </iframe>
@@ -101,7 +130,7 @@
                       <br><b>Email:</b> <span id = 'pro_email' > $email  </span>
                       <br><b>Birthday:</b> <span id = 'pro_bday' >  $dob </span>
                   </div>
-                </div>;";
+                </div>";
         ?>
     </div>
 
@@ -166,9 +195,39 @@
           </form>
 
 
+          <form name "add_task" method = "POST">
+                <?php
+                      if(isset($error_task_msg) && $error_task_msg) {
+                          echo "<p style=\"color: red;\">*",htmlspecialchars($error_task_msg),"</p>\n\n";
+                      }
+                      if(isset($task_smsg) && $task_smsg) {
+                          echo "<p style=\"color: blue;\">*",htmlspecialchars($task_smsg),"</p>\n\n";
+                      }
+                ?>
 
+                <fieldset>
+                   <legend class ="leg">Task: </legend>
+                   <input class = "task_busy" name = "task_name" type = "text">
+                </fieldset>
 
+                <fieldset class = "time">
+                   <legend class = "leg">Date: </legend>
+                   <input class = "date" name = "task_date" type="date">
+                </fieldset>
 
+                <fieldset class="time">
+                   <legend class = "leg">Time </legend>
+                   <label for="from"> From
+                   <input class =  "time_from" name = "task_from" type="time" name="usr_time">
+                   </label>
+                   <label for="to"> To
+                   <input class = "time_to" name = "task_to" type="time" name="usr_time">
+                   </label>
+                </fieldset>
+
+                <input name = "add_task_botton" type = "submit">
+
+         </form>
     </div>
   </body>
 
