@@ -5,17 +5,20 @@
     require "database.php";
     $email = $_SESSION['email'];
 
-    $sql = "SELECT USERID, FIRSTNAME, LASTNAME, DOB FROM USER WHERE EMAIL = '$email'";
-    $query = mysqli_query($connection, $sql);
-    $row   = mysqli_fetch_assoc($query);
+    $sql    = "SELECT USERID, FIRSTNAME, LASTNAME, DOB FROM USER WHERE EMAIL = '$email'";
+    $query  = mysqli_query($connection, $sql);
+    $row    = mysqli_fetch_assoc($query);
 
-    $id = $row['USERID'];
-    $first_name = $row['FIRSTNAME'];
-    $last_name = $row['LASTNAME'];
-    $dob = $row['DOB'];
+    $id            = $row['USERID'];
+    $first_name    = $row['FIRSTNAME'];
+    $last_name     = $row['LASTNAME'];
+    $dob           = $row['DOB'];
 
+
+    // store info in session
     $_SESSION['firstname'] = $first_name;
-    $_SESSION['lastname'] = $last_name;
+    $_SESSION['lastname']  = $last_name;
+    $_SESSION['id']        = $id;
   }
  ?>
  <!DOCTYPE>
@@ -114,7 +117,7 @@
 
         ?>
 
-    <iframe src = "../iframe.html" frameborder = "0" width="100%" height="130"  > </iframe>
+    <iframe src = "../iframe.php" frameborder = "0" width="100%" height="130"  > </iframe>
 
     <div id = "title">
             <h1>Profile</h1>

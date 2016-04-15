@@ -1,19 +1,27 @@
+<?php
+
+
+
+
+
+
+?>
 <!DOCTYPE>
 <html>
     <head>
         <title> Request a Match </title>
-        <link rel="stylesheet" type="text/css" href="CSS/contact_style.css">
-        <link rel="stylesheet" type="text/css" href="CSS/style.css">
-        <link rel="stylesheet" type="text/css" href="CSS/profile.css">
-        <link rel="stylesheet" type="text/css" href="CSS/req.css">
-        
-        <script src="Script/script.js"></script>
-        <script src="Script/datamanip.js"></script>
+        <link rel="stylesheet" type="text/css" href="../CSS/contact_style.css">
+        <link rel="stylesheet" type="text/css" href="../CSS/style.css">
+        <link rel="stylesheet" type="text/css" href="../CSS/profile.css">
+        <link rel="stylesheet" type="text/css" href="../CSS/req.css">
+
+        <script src="../Script/script.js"></script>
+        <script src="../Script/datamanip.js"></script>
 
     </head>
 
     <body link="black">
-        <iframe src = "iframe.html" frameborder = "0" width="100%" height="130"  > </iframe>
+        <iframe src = "../iframe.php" frameborder = "0" width="100%" height="130"  > </iframe>
         <div id="head_nav">
         </div>
         <div id = "title">

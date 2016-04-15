@@ -1,6 +1,5 @@
 <?php
 
-
      if($_POST && isset($_POST["submit_forms"])) {
         echo "yes";
         function test_input($data) {
@@ -12,7 +11,7 @@
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
           //$birth_day = test_input($_POST("bday"));
-          echo "1";
+            echo "1";
            $course = test_input($_POST["course"]);
            echo "2";
         }

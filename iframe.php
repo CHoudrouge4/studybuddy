@@ -12,14 +12,14 @@
         <div class = "container">
             <span class="nav-links">
 
-                <a href = "profile.html" class = "nav_link">
+                <a href = "./php/profile.php" class = "nav_link">
                 <img id = "profil_image" src = "Image\StudyBuddy_Logo.jpg">
                 </a>
 
                 <ul id = "panel" class = "pull-left" style="list-style-type:none" >
 
                     <li>
-                        <a href = "profile.html" class = "nav_link">
+                        <a href = "./php/profile.php" class = "nav_link">
                             <span > Profile </span>
                         </a>
                     </li>
@@ -36,13 +36,13 @@
                     </li>
 
                     <li>
-                        <a href = "schedule.html">
+                        <a href = "./php/schedule.php">
                         <span> Weekly Schedule </span>
                         </a>
                     </li>
 
                     <li>
-                        <a href = "request_a_match.html">
+                        <a href = "./php/request_a_match.php">
                         <span> Request a Match </span>
                         </a>
                     </li>

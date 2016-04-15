@@ -1,49 +1,17 @@
 <?php
+      require "database.php";
 
-/*      $host = "127.0.0.1";
-      $dbuser = "study_buddy_db";
-      $pass = "study_buddy_choudrouge4";// enter ur database password.
-      $dname = "study_buddy";
-      $connection = mysqli_connect($host,$dbuser,$pass,$dname);
-      if(mysqli_connect_errno()) {
-          die("Connection Failed!" . mysqli_connect_error());
-      }
-      $stmt = mysqli_stmt_init($connection);
-      if (mysqli_stmt_prepare($stmt, "SELECT email, password, confirmed FROM USER WHERE EMAIL = ?")) {
-           /* bind parameters for markers */
-      /*     mysqli_stmt_bind_param($stmt, "s", $email);
-
-           /* execute query */
-       //    mysqli_stmt_execute($stmt);
-
-           /* bind result variables */
-       /*    mysqli_stmt_bind_result($email_check, $password_conf, $conf);
-
-           mysqli_stmt_fetch($stmt);
-           echo "2";
-
-           echo $email_check;
-           mysqli_stmt_close($stmt);
-      }
-      */
-
-
-
-      require "./php/database.php";
-
-      $id   = 19;
+      $id   = $_SESSION['id'];
       // query courses
       $stmt = "SELECT c.TITLE, c.START_FROM, c.END_AT, c.DAYS FROM COURSE c NATURAL JOIN (SELECT COURSEID from ENROLLEMENT where USERID = $id) t";
       $res  = mysqli_query($connection, $stmt);
 
       // query events
-      $stmt = "SELECT TITLE, START_FROM, END_AT, BUSYDATE from BUSY where USERID = $id";
+      $stmt      = "select TITLE, START_FROM, END_AT, BUSYDATE from BUSY where USERID = $id";
       $res_event = mysqli_query($connection, $stmt);
 
       $system_date = date("Y-m-d");
       $system_week = get_week($system_date);
-
-      //$row  = mysqli_fetch_array($res);
 
 
       function get_week(&$date) {
@@ -141,14 +109,13 @@
       function create_event_schedule(&$schedule) {
             global $res_event;
             if (mysqli_num_rows($res_event) > 0) {
-
                   while($row = mysqli_fetch_assoc($res_event)) {
                         $title      = $row['TITLE'];
                         $start      = $row['START_FROM'];
                         $end        = $row['END_AT'];
                         $date       = $row['BUSYDATE'];
                         $event_week = get_week($date);
-                        if (strcmp($event_week,$system_week)) {
+                        if (strcmp($event_week, $system_week)) {
                               $day = get_day($date);
                               set_schedule($schedule, $title, $start, $end, $day);
                         }
@@ -161,14 +128,6 @@
             create_course_schedule($schedule);
             create_event_schedule($schedule);
             return $schedule;
-      }
-      $schedule = create_schedule();
-
-      for($i = 0; $i < 13; $i++) {
-            for ($j = 0; $j < 5; $j++) {
-                  echo $schedule[$i][$j] . " ";
-            }
-
       }
 
 ?>
