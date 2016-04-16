@@ -43,7 +43,7 @@
       */
       function set_time_coordinate(&$time) {
       //     return substr($time, 0, 2) - 8;
-          if ($time >= "08:00:00" && $time < "09:00:00") return 0;
+          if ($time >= "08:00:00" && $time < "09:00:00")   return 0;
             if ($tme  >= "09:00:00" && $time < "10:00:00") return 1;
             if ($time >= "10:00:00" && $time < "11:00:00") return 2;
             if ($time >= "11:00:00" && $time < "12:00:00") return 3;

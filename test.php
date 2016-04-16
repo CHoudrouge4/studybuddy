@@ -8,7 +8,7 @@
       $w  =  $dt->format("W");
       echo $w;*/
 
-
+/*
       $system_date = "2016-04-23";
       $system_week = get_week($system_date);
 
@@ -40,5 +40,10 @@
 
 //      echo get_day($system_date);
 
-      substr($time, 0, 2) - 8;
+      substr($time, 0, 2) - 8;*/
+      $course = "cmps";
+      $course_number = "277";
+
+      $course_name =  "$course$course_number";
+      echo $course_name;
 ?>
