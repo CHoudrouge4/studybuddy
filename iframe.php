@@ -24,13 +24,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href = "matches.html">
+                        <a href = "./php/matches.php">
                         <span> Matches </span>
                         </a>
                     </li>
 
                     <li>
-                        <a href = "./contacts.html">
+                        <a href = "./php/contacts.php">
                         <span> Contacts </span>
                         </a>
                     </li>

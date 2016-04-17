@@ -4,7 +4,7 @@
       require "schedule_utility.php";
 
       $day  = get_day($date);
-
+      //$course_t = $course_title;
 /*
       //get all the courses that make conflict
       $conflict_courses =  "SELECT COURSEID from COURSE where START_FROM >= '$start_from'  AND END_AT <= '$end_at' AND DAYS LIKE '%$day%'";

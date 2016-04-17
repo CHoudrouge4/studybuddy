@@ -1,27 +1,22 @@
 <?php
-
       session_start();
       if (isset($_SESSION['email'])) {
             $id  =  $_SESSION['id'];
             if(isset($_POST['search'])) {
-
                   function test_input($data) {
                          $data = trim($data);
                          $data = stripslashes($data);
                          $data = htmlspecialchars($data);
                          return $data;
                   }
-
                   if ($_SERVER["REQUEST_METHOD"] == "POST") {
                           //$birth_day = test_input($_POST("bday"));
                           $course         = test_input($_POST['course']);
                           $course_number  = test_input($_POST['course_number']);
                   }
-
                   if (empty($course) || empty($course_number)) {
                       $errorMsg = "can't leave some fields empty";
                   } else {
-
                         $start_from   =  $_POST['time_from'];
                         $end_at       =  $_POST['time_to'];
                         $date         =  $_POST['date_course'];
@@ -29,11 +24,14 @@
                         require "request_match_utility.php";
                         $res   = request($connection, $course_title, $start_from, $end_at, $day);
                         $table = create_result($res);
-                        
+                        $_SESSION['course_title'] = $course_title;
+                        $_SESSION['time_from']    = $start_from;
+                        $_SESSION['end_at']       = $end_at;
+                        $_SESSION['date']         = $date;
+
                   }
             }
       }
-
 ?>
 <!DOCTYPE>
 <html>
@@ -97,29 +95,28 @@
                               <form method = "POST" >
                                     <?php
                                     if($res) {
-
-
                                           for($i = 0; $i < count($table); $i++) {
                                                 $value_1 =  $table[$i][0];
                                                 $value_2 =  $table[$i][1];
                                                 $value_3 =  $table[$i][2];
                                                 $value_4 =  $table[$i][3];
                                                 echo  "<input type='radio' name='name' value ='$value_4' > $value_1 $value_2 <br>";
-
                                                 //echo $table[$i][0];
                                           }
                                           echo "<input id = 'send_req' name ='send' type = 'submit'>";
-
-
                                     }
-
                                     if (isset($_POST['send'])) {
-                                          $sug_id = $_POST['name'];
-                                          $stmt = "INSERT into CONTACTLIST (USER1ID, USER2ID) values ('$id', '$sug_id')";
+                                          $sug_id      = $_POST['name'];
+                                          $id          = $_SESSION['id'];
+                                          $req_t       = $_SESSION['course_title'];
+                                          $req_from    = $_SESSION['time_from'];
+                                          $req_to      = $_SESSION['end_at'];
+                                          $req_date    = $_SESSION['date'];
+
+                                          $stmt = "INSERT into REQUESTS (USERID_FROM, USERID_TO, COURSE_TITLE, TIME_FROM, TIME_TO, REQUEST_DATE) values ('$id', '$sug_id', '$req_t', '$req_from', '$req_to', '$req_date')";
                                           require_once "database.php";
                                           mysqli_query($connection, $stmt);
                                     }
-
                                     ?>
                               </form>
                         </td>
