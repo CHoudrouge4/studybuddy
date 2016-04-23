@@ -1,14 +1,20 @@
 <?php
-      require "database.php";
+
+      require_once "database.php";
+      $db =  new database();
 
       $id   = $_SESSION['id'];
+
       // query courses
       $stmt = "SELECT c.TITLE, c.START_FROM, c.END_AT, c.DAYS FROM COURSE c NATURAL JOIN (SELECT COURSEID from ENROLLEMENT where USERID = $id) t";
-      $res  = mysqli_query($connection, $stmt);
+      //$res  = mysqli_query($connection, $stmt);
+      $res = $db->select($stmt);
+
 
       // query events
-      $stmt      = "select TITLE, START_FROM, END_AT, BUSYDATE from BUSY where USERID = $id";
-      $res_event = mysqli_query($connection, $stmt);
+      $stmt      = "SELECT TITLE, START_FROM, END_AT, BUSYDATE from BUSY where USERID = $id";
+      //$res_event = mysqli_query($connection, $stmt);
+      $res_event = $db->select($stmt);
 
       $system_date = date("Y-m-d");
       $system_week = get_week($system_date);
@@ -42,7 +48,6 @@
       * @return: the coorect index on the schedule
       */
       function set_time_coordinate(&$time) {
-      //     return substr($time, 0, 2) - 8;
           if ($time >= "08:00:00" && $time < "09:00:00")   return 0;
             if ($tme  >= "09:00:00" && $time < "10:00:00") return 1;
             if ($time >= "10:00:00" && $time < "11:00:00") return 2;
@@ -95,32 +100,31 @@
 
       function create_course_schedule(&$schedule) {
             global $res;
-            if (mysqli_num_rows($res) > 0) {
-                  while ($row   = mysqli_fetch_assoc($res)) {
-                         $title = $row['TITLE'];
-                         $start = $row["START_FROM"];
-                         $end   = $row["END_AT"];
-                         $days = $row["DAYS"];
-                         set_schedule($schedule, $title, $start, $end, $days);
-                  }
+
+            for($i = 0;  $i < count($res); $i++) {
+                   $title = $res[$i]['TITLE'];
+                   $start = $res[$i]["START_FROM"];
+                   $end   = $res[$i]["END_AT"];
+                   $days  = $res[$i]["DAYS"];
+                   set_schedule($schedule, $title, $start, $end, $days);
             }
+
       }
 
       function create_event_schedule(&$schedule) {
             global $res_event;
-            if (mysqli_num_rows($res_event) > 0) {
-                  while($row = mysqli_fetch_assoc($res_event)) {
-                        $title      = $row['TITLE'];
-                        $start      = $row['START_FROM'];
-                        $end        = $row['END_AT'];
-                        $date       = $row['BUSYDATE'];
-                        $event_week = get_week($date);
-                        if (strcmp($event_week, $system_week)) {
-                              $day = get_day($date);
-                              set_schedule($schedule, $title, $start, $end, $day);
-                        }
+            for($i = 0; $i < count($res_event); $i++) {
+                  $title      = $res_event[$i]['TITLE'];
+                  $start      = $res_event[$i]['START_FROM'];
+                  $end        = $res_event[$i]['END_AT'];
+                  $date       = $res_event[$i]['BUSYDATE'];
+                  $event_week = get_week($date);
+                  if (strcmp($event_week, $system_week)) {
+                        $day = get_day($date);
+                        set_schedule($schedule, $title, $start, $end, $day);
                   }
             }
+
       }
 
       function create_schedule() {
@@ -129,5 +133,8 @@
             create_event_schedule($schedule);
             return $schedule;
       }
+
+      $schedule = create_schedule();
+      $schedule[0][3];
 
 ?>

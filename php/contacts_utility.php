@@ -1,33 +1,24 @@
 <?php
 
       require_once "database.php";
+
       function get_contacts_query($id) {
-            global $connection;
+            $db = new database();
             $stmt = "SELECT USER2ID from CONTACTLIST where USER1ID = '$id'";
             $stmt = "SELECT USERID, FIRSTNAME, LASTNAME, EMAIL from USER u, ($stmt) c where u.USERID = c.USER2ID";
-            return mysqli_query($connection, $stmt);
+            return $db->select($stmt);
       }
 
       function get_contacts($id) {
-            $res = get_contacts_query($id);
-            $contacts;
-            if (mysqli_num_rows($res) > 0) {
-                  for ($i = 0; $row = mysqli_fetch_assoc($res); $i++) {
-                        $contacts[$i][1] = $row['FIRSTNAME'];
-                        $contacts[$i][2] = $row['LASTNAME'];
-                        $contacts[$i][3] = $row['EMAIL'];
-
-                  }
-            }
-            return $contacts;
+            return get_contacts_query($id);
       }
 
       function print_contacts_to_html(&$contacts) {
 
             for($i = 0; $i < count($contacts); $i++) {
-                  $first_name = $contacts[$i][1];
-                  $last_name  = $contacts[$i][2];
-                  $email      = $contacts[$i][3];
+                  $first_name = $contacts[$i]['FIRSTNAME'];
+                  $last_name  = $contacts[$i]['LASTNAME'];
+                  $email      = $contacts[$i]['EMAIL'];
                   echo "<div class = 'contacts'>
                       <img class = 'cont_img' src = '../Image/personel.png'>
                       <h4> $first_name $last_name</h4>
@@ -38,4 +29,6 @@
             }
 
       }
+
+
 ?>

@@ -1,79 +1,74 @@
-
-<!DOCTYPE>
 <?php
-  //get data base connection
-  require "database.php";
-?>
-<html>
-    <head>
-        <title>
-            sign up
-        </title>
-    </head>
-    <body>
-        <?php
+      //get data base connection
+      require "database.php";
+      $db = new database();
+      //import the send mail function
+      require 'mail_confirmation.php';
 
-            //import the send mail function
-            require 'mail_confirmation.php';
-
-            //check if the email already exist in the database
-            function is_exist($email, $connection) {
-              $sql = "SELECT email FROM USER where EMAIL = '$email';";
-              $result = mysqli_query($connection, $sql);
-              if (mysqli_num_rows($result) == 0) {
+      /*
+      * @param: email, connection database connection
+      * @return true if the email already exist in the database and false otherwize.
+      */
+      function is_exist($email) {
+          global $db;
+          $sql = "SELECT EMAIL FROM USER where EMAIL = '$email';";
+          $result = $db->query($sql);
+          if (mysqli_num_rows($result) == 0) {
                 return false;
-              } else {
-                return true;
-              }
-            }
+         } else {
+               return true;
+         }
+     }
 
-            //after sunmit botton is pressed
-            if(isset($_POST['submit_button'])) {
+     if(isset($_POST['submit_button'])) {
+
                 function test_input($data) {
                              $data = trim($data);
                              $data = stripslashes($data);
                              $data = htmlspecialchars($data);
                              return $data;
                 }
-
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        //$birth_day = test_input($_POST("bday"));
                         $first_name = test_input($_POST['first_name']);
                         $last_name = test_input($_POST['last_name']);
                         $email = test_input($_POST['aub_mail']);
                         $password = test_input($_POST['sign_up_password']);
                         $password_confirmation = test_input($_POST['sign_up_password_confirmation']);
-                }
-
+                        $dob = test_input($_POST['bday']);
+               }
 
                 // chek if exit in the database
-                if(!is_exist($email, $connection)) {
+                if(!is_exist($email)) {
                   //generate a confirmation ccode;
-                  $confirm = rand();
+                  $confirm = rand(); //generate a random number
 
+                  //set the message for confirmation email
                   $message = "
-                      Confirm your EMAIL
-                      Click the link below to verify your account.
-                      \"http://127.0.0.1/studybuddy/confirmation.php?email=$email&code=$confirm\"
+                  Confirm your EMAIL
+                  Click the link below to verify your account.
+                  \"http://127.0.0.1/studybuddy/php/confirmation.php?email=$email&code=$confirm\"
                   ";
 
-                  if (sendmail_confirmation($email, $message)){
-                        $sql = "INSERT INTO USER (FIRSTNAME, LASTNAME, EMAIL, PASSWORD, confirmation_code, confirmed)".
-                          "VALUES('$first_name','$last_name','$email','$password',$confirm, 'FALSE');";
+                  if (sendmail_confirmation($email, $message)) {
+                        $host = "127.0.0.1";
+                        $dbuser = "study_buddy_db";
+                        $pass = "study_buddy_choudrouge4";// enter ur database password.
+                        $dname = "study_buddy";
+                        $connection = mysqli_connect($host,$dbuser,$pass,$dname);
+                        if(mysqli_connect_errno()) {
+                            die("Connection Failed!" . mysqli_connect_error());
+                         }
+                         mysqli_query($connection, "INSERT INTO USER (FIRSTNAME, LASTNAME, EMAIL, DOB, PASSWORD, confirmation_code, confirmed) VALUES('$first_name','$last_name','$email', '$dob', '$password', '$confirm', 'FALSE')");
+                         mysqli_close($connection);
 
-                        $res = mysqli_query($connection, $sql);
-                        if(!$res) {
-                            die("Query Failed" . mysqli_error($connection));
-                        } else {
-                            echo "registration complete, please confirm your email\n";
-                        }
-                      }
-                   } else {
-                     echo "you already have an account";
-                   }
-            } else {
-                echo "form not submmited properly";
-            }
-        ?>
-    </body>
-</html>
+                        header("Location: ./confirm.html");
+                  }
+               } else {
+                    echo "you already have an account";
+               }
+      } else {
+              header("Location: ./index.php");
+      }
+
+
+?>

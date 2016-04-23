@@ -5,7 +5,21 @@
   font-style: normal;
 }
 body{
+    background-image: url("../Image/background.jpg");
+    background-repeat: repeat;
+    background-attachment: fixed;
     font-family: 'Ubuntu';
+}
+.nav{
+    background: none;
+}
+th {
+    text-align: left;
+}
+div#conf {
+    margin-right: -15px;
+    position: relative;
+    top: 220px;
 }
 #username_id {
 /*    position: absolute;*/
@@ -24,7 +38,6 @@ body{
     padding: 10px;
     width: 100%;
 }
-
 #password_id {
 /*    position: absolute;*/
     top: 250px;
@@ -62,15 +75,10 @@ hr {
 #text_ask_sign_up {
     text-align: center;
     font-size:small;
+    color: #C2BBE3;
 }
 
-#profil_image {
-/*    position: absolute;*/
-    top: 450px;
-    left: 350;
-    width: 100;
-    height: 100;
-}
+
 
 #first_name {
 /*    position: absolute;*/
@@ -91,6 +99,10 @@ float: left;}
     top: 490px;
     left: 450;
 /*    width: 375;*/
+}
+#user_email {
+    width: 75%;
+    float: left;
 }
 form {
     width: 100%;
@@ -117,15 +129,22 @@ form {
     left: 450;
 }
 
-#sign_up_botton, #sign_in_button {
-/*    position: absolute;*/
-    top: 620px;
-    left: 610;
+.SubmitHolder input[type="submit"]{
     border-radius: 25px;
-    padding : 5px;
-    border: 2px solid #f3f3f3;
+    padding: 12px;
+    color: white;
+    border: 2px solid #BEC9FF;
+    background-color: #16448F
 }
-#sign_up_botton{
+.SubmitHolder input[type="submit"]:hover{
+    border: 2px solid #6C93D2;
+    background-color: #2059B7;
+}
+.SubmitHolder input[type="submit"]:active{
+    background-color: #A8C5F6;
+    border: 2px solid #BEC9FF;
+}
+#log_in_logo{
     margin-top: 10px;
     margin-bottom: 0;
 }
@@ -151,15 +170,34 @@ margin-bottom: 25px;
     text-align: center;
     color : #184CA0;
 }
-header {
+.pages_body{
+      height: auto;
+      position: relative;
+      top: 180px;
+}
+header, iframe{
     border-bottom: 1px solid #eee;
-    margin-bottom: 60px;
+    position: fixed;
+    z-index: 999;
+    background-color: white;
+    width: 100%;
+    height: 148px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    box-shadow: 0px 6px 35px -11px;
+}
+iframe{
+    top: 0;
+    right: 0;
 }
 .SubmitHolder{
 text-align: center;
     padding-top: 10px
 }
-.field input[type="text"],.field input[type="password"],.field input[type="date"]{
+ .formContainer input[type="text"], .formContainer input[type="password"], .formContainer input[type="date"]{
     border: 1px solid #f2f2f2;
     border-radius: 20px;
     box-shadow: 0 1px 3px -1px #a2a2a2;
@@ -169,33 +207,81 @@ text-align: center;
 }
 
 #text_ask_sign_up{
-display: inline-block;
-    left: 155px;
-    position: absolute;
+    display: inline-block;
+    left: 71px;
+    position: relative;
     text-align: center;
-    top: -26px;
+    top: -46px;
+    background-color: rgba(255,255,255,-7.7);
 }
 
 .formContainer {
-    background: #f1f1f1 none repeat scroll 0 0;
+    background: #D4D8F4 none repeat scroll 0 0;
     border-radius: 15px;
-    margin: 0 auto;
+    margin: 0 auto 45;
     padding: 20px;
     width: 370px;
+    box-shadow: 0px 6px 30px -10px #4C5B7A;
 }
-
-.logo {
+header.smaller, iframe.smaller {
+    height: 82px;
+}
+header.smaller img, iframe.smaller img {
+    float: right;
+    width: 83px;
+    margin-left: 34px;
+}
+header.smaller h1, iframe.smaller h1 {
+    opacity: 0;
+    padding-top: 5px;
+    line-height: 75px;
+    font-size: 36px;
+}
+.logo, .nav_link_img {
     float: left;
     width: 150px;
 }
-.logo img{
-width: 100%
+.nav_link{
+    float: left;
+    padding-right: 5%;
+}
+.logo img, #profil_image{
+    width: 100%;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
 }
 
 header > h1 {
     float: left;
-    font-size: 40px;
+    font-size: 47px;
     margin-left: 0;
-    padding-top: 70px;
-    color:rgb(0,42,90)
+    padding-top: 66px;
+    color: rgb(0,42,90);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+div#info_p {
+    line-height: 2;
+    background: #D4D8F4 none repeat scroll 0 0;
+    border-radius: 15px;
+    width: 500px;
+    float: left;
+    padding: 30px;
+    color: #0B194C;
+    margin-bottom: 20px;
+}
+.row{
+    margin-left: -15px;
+    margin-right: -15px;
+    position: relative;
+    top: 220px;
+}
+ul#panel {
+    padding-top: 60;
 }

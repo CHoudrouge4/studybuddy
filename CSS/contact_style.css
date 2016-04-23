@@ -9,6 +9,17 @@
     display: inline-block;
     height: 100%;
 }
+.contacts {
+    position: relative;
+    top: 64px;
+    clear: left;
+    display: block;
+    height: 4%;
+    padding: 20px;
+    padding-left: 80px;
+    background: #D4D8F4 none repeat scroll 0 0;
+    border-radius: 15px;
+}
 .logout h5{
     display: inline-block;
     margin : 0px;
@@ -28,12 +39,19 @@
     display: inline-block;
     height: 70%;
 }
-.contacts{
+.contact_page {
+    height: auto;
+    position: relative;
+    top: 180px;
+}
+.contacts {
     clear: left;
-    display : block;
+    display: block;
     height: 4%;
-    padding : 20px;
+    padding: 20px;
     padding-left: 80px;
+    max-width: 450px;
+    margin-left: 55px;
 }
 .cont_img {
     clear : left;

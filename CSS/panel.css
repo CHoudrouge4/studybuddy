@@ -1,24 +1,16 @@
 a:link {
     text-decoration: none;
-    color: balck;
-    padding: 10px;
+    color: black;
 }
 
 a:visited {
     text-decoration: none;
     color: black;
 }
-#profil_image {
-    width: 100;
-    height: 100;
-}
 
 #panel {
-    position: absolute;
-    top: 30;
-    left: 100;
-    font-size:large;
-
+    font-size: 20;
+    font-weight: bold;
 }
 
 #sign_out {
@@ -30,4 +22,10 @@ a:visited {
 
 ul li{
   display: inline;
+}
+body{
+    font-family: 'Ubuntu';
+    background: white;
+    border: 1px gray;
+    margin : 0;
 }

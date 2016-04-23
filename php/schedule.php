@@ -1,5 +1,5 @@
 <?php
-
+      
       session_start();
       if(isset($_SESSION['email'])) {
             require "schedule_utility.php";
@@ -9,6 +9,8 @@
             $time   = Array("8:00 - 9:00  AM", "9:00 - 10:00 AM", "10:00 - 11:00 AM", "11:00 - 12:00 PM", "12:00 - 1:00 PM", "2:00 - 3:00 PM",
                   "3:00 - 4:00 PM", "4:00 - 5:00 PM", "5:00 - 6:00 PM", "6:00 - 7:00 PM", "7:00 - 8:00 PM", "8:00 - 9:00 PM", "9:00 - 10:00 PM");
 
+      } else {
+            header('Location: ../index.php');
       }
 
 
@@ -21,9 +23,10 @@
     <link rel="stylesheet" type="text/css" href="../CSS/contact_style.css">
     <style type="text/css">
 
-    tr{
-        padding-bottom: 40px;
-    }
+    td {
+          padding: 5px 10px;
+          background-color: #E6EEFB;
+      }
     th,td
     {
         margin: 0;
@@ -37,12 +40,11 @@
         padding: 5px 10px;
     }
 
-    th
-    {
-        background: #666;
-        color: white;
-        padding: 5px 10px;
-    }
+    th {
+          background: #0F2D60;
+          color: white;
+          padding: 5px 10px;
+      }
 
     td:hover
     {
@@ -56,6 +58,7 @@
     <body>
 
         <iframe src = "../iframe.php" frameborder = "0" width="100%" height="130"  > </iframe>
+        <div class = "pages_body">
         <div id = "title">
             <h1>Schedule</h1>
         </div>
@@ -228,5 +231,6 @@
 
 </table>
 <br><br>
+</div>
 </body>
 </html>

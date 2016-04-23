@@ -1,25 +1,22 @@
 #matches {
-    position: absolute;
-    left: 100;
+
     width: 500;
     height: 120;
 }
 
 #left_div {
-    position: absolute;
-    top: 300;
+
     float: left;
     width: 100%;
     padding-left: 80px;
 }
-.imgg{
-    height : 30px;
+.imgg {
+    height: 80px;
 }
 #profil_image {
     width: 100;
     size: 100;
 }
-
 ul li{
     display: inline;
     padding-bottom: 15px;

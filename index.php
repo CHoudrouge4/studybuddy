@@ -1,5 +1,11 @@
 <?php
-    require "./php/inputverification.php";
+
+      /* include the file that contain the function that check the validation of the input
+      *  the input that validate the requirements.
+       */
+      require "./php/inputverification.php";
+      require "./php/signin.php";
+      require "./php/forget_password.php";
 ?>
 
 <!DOCTYPE>
@@ -9,10 +15,12 @@
         <link rel="stylesheet" type="text/css" href="CSS/grid-reset.css">
         <link rel="stylesheet" type="text/css" href="CSS/style.css">
         <!--<script src="Script/datamanip.js"></script>-->
+        <script src = "Script/styling.js"></script>
+        <script src = "Script/classie.js"></script>
     </head>
 
     <body>
-        <div class="container">
+
 
            <header class="clearfix">
             <a href="#" class="logo"><img src="Image/StudyBuddy_Logo.jpg"></a>
@@ -20,16 +28,25 @@
                <h1>Study Buddy</h1>
 
             </header>
-
+        <div class="container">
             <div class="row clearfix">
 
                 <div class="col-md-6">
                     <div class="formContainer">
                     <!--                <img src="./Image/sign_in.png" alt="sign in" style="width:304px;height:228px;">-->
                         <h1>Sign In</h1>
-                        <form method = "POST" action="./php/signin.php">
+                        <?php
+                                    /**
+                                    *     print the error msg if it is set.
+                                    *
+                                    */
+                                  if(isset($sign_in_error) && $sign_in_error) {
+                                      echo "<p style=\"color: red;\">   ",htmlspecialchars($sign_in_error),"</p>\n\n";
+                                  }
+                              ?>
+                        <form method = "POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                             <div class="field">
-                                <input id = "username_id" type="text" name="signin_mail" placeholder = "abc00@mail.aub.edu">
+                                <input id = "username_id" type="text" name="signin_mail" placeholder = "abc00@mail.aub.edu" value = "<?php if(isset($_POST['signin_mail'])) echo htmlspecialchars($_POST['first_name']); ?>">
                             </div>
                             <div class="field">
                                 <input id = "password_id" type="password" name="signin_password" placeholder= "password">
@@ -69,7 +86,7 @@
                         <div class="field">
                             <input id = "bday_id" type="date" name="bday" min="1990-01-02">
                         </div>
-                        <div class="field">
+                        <div class="SubmitHolder">
                             <input id = "sign_up_botton" type = "submit" name = "submit_button">
                         </div>
 
@@ -77,8 +94,21 @@
                 </div>
 
             </div>
+                <div class="col-md-6">
+                    <div class="formContainer">
+                        <h1>Forgot Password</h1>
+                        <form method = "POST">
+                            <div class="field">
+                                <input id = "user_email" type="text"
+                                    name = "forgot_email" placeholder = "abc00@mail.aub.edu">
+                            </div>
+                            <div class="SubmitHolder">
+                                <input id = "forgot_button" type="submit" value="Send">
+                            </div>
+                        </form>
+                    </div>
 
-            </div>
+                </div>
         </div>
     </body>
 </html>

@@ -1,69 +1,52 @@
 <?PHP
-    require "database.php";
-?>
 
-<!DOCTYPE>
-<html>
-    <head>
-        Sign in
-    </head>
-    <body>
-        <?php
+      /**
+      *    this file contain the necessary
+      *    algorithm to sign in.
+      *
+      */
+      //include the database connection
+      require_once "database.php";
+      require_once "inputverification.php";
 
-        if(isset($_POST['sign_in_button'])) {
+      $db = new database();
+      //$db->connect();
 
+      if(isset($_POST['sign_in_button'])) {
+
+            /* these function helps in aboiding sql injection */
             function test_input($data) {
-                         $data = trim($data);
-                         $data = stripslashes($data);
-                         $data = htmlspecialchars($data);
-                         return $data;
+                  $data = trim($data);
+                  $data = stripslashes($data);
+                  $data = htmlspecialchars($data);
+                  return $data;
             }
 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    //$birth_day = test_input($_POST("bday"));
-                    $email = test_input($_POST['signin_mail']);
-                    $password = test_input($_POST['signin_password']);
+                  $email = test_input($_POST['signin_mail']);
+                  $password = test_input($_POST['signin_password']);
 
             }
-
 
             if (empty($email) || empty($password)) {
-                echo "can't leave some fields empty";
+                  $sign_in_error = "can't leave some fields empty";
+            } else if (!valid_email($email)) {
+                  $sign_in_error = "mail not valid";
             } else {
+                  $res = $db->select("SELECT password, confirmed FROM USER WHERE EMAIL = 'hah51@mail.aub.edu'");  //get the password and confirmed
 
-                $sql_user = "SELECT email FROM USER WHERE EMAIL = '$email'";
-                $sql_password = "SELECT password FROM USER WHERE EMAIL = '$email'"; //return password
-                $sql_confirmaed = "SELECT confirmed FROM USER where EMAIL = '$email'";
-
-                $res_email = mysqli_query($connection, $sql_user);
-                $res_password = mysqli_query($connection, $sql_password);
-                $res_confirmed = mysqli_query($connection, $sql_confirmaed);
-
-                //echo "here \n";
-                if(!$res_email) {
-                    die("Query Failed" . mysqli_error($connection));
-                } else {
-                    $row = mysqli_fetch_assoc($res_password);
-                    if (mysqli_num_rows($res_password) > 0) {
-                        if ($row["password"]. "" == $password) {
-                          $confirmed = mysqli_fetch_assoc($res_confirmed);
-                          if($confirmed["confirmed"]) {
-                              //echo "success";
-                              $row_email = mysqli_fetch_assoc($res_email);
+                  if (strcmp($res[0]['password'],$password) !== 0) { //check pass
+                        if(strcmp($res[0]['confirmed'],"1")) { //check confirmed
                               session_start();
-                              $_SESSION["email"] = $row_email['email'];
-                              header('Location: ./profile.php');
-                          } else {
-                             echo "confirm your email first";
-                          }
-                        } else
-                            echo "wrong password";
-                    }
-                }
+                              $_SESSION["email"] = $email;
+                              header('Location: ./php/profile.php'); //direct user to profile
+                        } else {
+                              $sign_in_error  = "confirm your email first";
+                        }
+                  } else {
+                        $sign_in_error  = "wrong password";
+                  }
             }
-        } else {
-            echo "form not submmited properly";
-        }
-         ?>
-    </body>
-</html>
+      }
+
+?>
