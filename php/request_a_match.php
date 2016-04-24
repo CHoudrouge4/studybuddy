@@ -1,6 +1,7 @@
 <?php
-      require "database.php";
-      $db = new database();
+
+      require "database.php"; //include the database
+      $db = new database();  //create a database object
       session_start();
       if (isset($_SESSION['email'])) {
             $id  =  $_SESSION['id'];
@@ -16,8 +17,8 @@
                 } else {
                       echo $date;
                        require "request_match_utility.php";
-                        $res   = request($course, $start_from, $end_at, $day);
-                        $table = create_result($res);
+                        $res   = request($course, $start_from, $end_at, $day);  //get the result
+                        $table = create_result($res);                           // creat a table for the result
                         $_SESSION['course_title'] = $course;
                         $_SESSION['time_from']    = $start_from;
                         $_SESSION['end_at']       = $end_at;
@@ -733,6 +734,7 @@
 
                                 <form method = "POST" >
                                         <?php
+                                        //print the result
                                         if($res) {
                                             for($i = 0; $i < count($table); $i++) {
                                                     $value_1 =  $table[$i][0];
@@ -745,7 +747,18 @@
                                                     //echo $table[$i][0];
                                                     }
                                             }
-                                            echo "<tr><td></td><td><input id = 'send_req' name ='send' type = 'submit'></td>";
+                                            if(count($table) == 0) {
+                                                 echo "<tr> <td> NO MATCH FOUND<td></tr>";
+                                            } else if (count($table) == 1)  {
+                                                 $value_4 =  $table[0][3];
+                                                 if (strcmp($value_4, $id) === 0) {
+                                                       echo "<tr> <td> NO MATCH FOUND<td></tr>";
+                                                 } else {
+                                                      echo "<tr><td></td><td><input id = 'send_req' name ='send' type = 'submit'></td>";
+                                                 }
+                                           } else {
+                                                 echo "<tr><td></td><td><input id = 'send_req' name ='send' type = 'submit'></td>";
+                                           }
                                         }
                                         if (isset($_POST['send'])) {
                                             $sug_id      = $_POST['name'];

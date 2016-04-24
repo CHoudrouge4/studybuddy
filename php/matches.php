@@ -41,15 +41,16 @@
         <div id = "left_div">
             <table id = "result">
                <?php
+                        //print the requested table
                         print_requested($requested_table);
                         for ($i = 0; $i < count($requested_table); $i++) {
-
+                              //if the accept button is pressed
                               if(isset($_POST["i{$i}_x"]) && isset($_POST["i{$i}_y"])) {
                                     $req_id = $requested_table[$i]['ID'];
                                     $email  = $requested_table[$i]['EMAIL'];
                                     accept_acction($email, $id, $req_id);
                                     header("Refresh:0");
-
+                              //if the reject button is pressed
                               } else if (isset($_POST["ii{$i}_x"]) && isset($_POST["ii{$i}_y"]) ) {
                                     $req_id = $requested_table[$i]['ID'];
                                     reject_acction($req_id);

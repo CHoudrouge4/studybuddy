@@ -1,33 +1,26 @@
 <?php
-      //get data base connection
+      /* include the database class */
       require "database.php";
-      $db = new database();
+      $db = new database();         //create database object
       //import the send mail function
       require 'mail_confirmation.php';
 
-      /*
-      * @param: email, connection database connection
-      * @return true if the email already exist in the database and false otherwize.
-      */
-      function is_exist($email) {
-          global $db;
-          $sql = "SELECT EMAIL FROM USER where EMAIL = '$email';";
-          $result = $db->query($sql);
-          if (mysqli_num_rows($result) == 0) {
-                return false;
-         } else {
-               return true;
-         }
-     }
+
 
      if(isset($_POST['submit_button'])) {
 
+                /**
+                * @param: data string
+                * @return: data string
+                * @effect: apply input validation function to protect against sql injection
+                */
                 function test_input($data) {
                              $data = trim($data);
                              $data = stripslashes($data);
                              $data = htmlspecialchars($data);
                              return $data;
                 }
+
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $first_name = test_input($_POST['first_name']);
                         $last_name = test_input($_POST['last_name']);
@@ -37,10 +30,9 @@
                         $dob = test_input($_POST['bday']);
                }
 
-                // chek if exit in the database
-                if(!is_exist($email)) {
-                  //generate a confirmation ccode;
-                  $confirm = rand(); //generate a random number
+
+                  //generate a confirmation code;
+                  $confirm = rand();
 
                   //set the message for confirmation email
                   $message = "
@@ -48,8 +40,9 @@
                   Click the link below to verify your account.
                   \"http://127.0.0.1/studybuddy/php/confirmation.php?email=$email&code=$confirm\"
                   ";
-
+                  //send the confirmation mail, if it is send add it to the data base.
                   if (sendmail_confirmation($email, $message)) {
+                        // we created a private connection since the database object didn't work for nonobvious reasons.s
                         $host = "127.0.0.1";
                         $dbuser = "study_buddy_db";
                         $pass = "study_buddy_choudrouge4";// enter ur database password.
@@ -63,9 +56,7 @@
 
                         header("Location: ./confirm.html");
                   }
-               } else {
-                    echo "you already have an account";
-               }
+
       } else {
               header("Location: ./index.php");
       }

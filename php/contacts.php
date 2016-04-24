@@ -2,9 +2,9 @@
 
      session_start();
      if (isset($_SESSION['email'])) {
-            $id = $_SESSION['id'];
-            require_once "contacts_utility.php";
-            $contacts = get_contacts($id);
+            $id = $_SESSION['id']; //get the schession from id
+            require_once "contacts_utility.php";//includes the contacts utility
+            $contacts = get_contacts($id);      //get the contacts.
       } else {
             header('Location: ../index.php');
       }
@@ -26,7 +26,7 @@
         </div>
         <br>
 <?php
-
+      // print the contacts 
       print_contacts_to_html($contacts);
 
 ?>

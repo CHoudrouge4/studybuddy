@@ -19,20 +19,31 @@
       $system_date = date("Y-m-d");
       $system_week = get_week($system_date);
 
-
+      /**
+      * @param: $date type date
+      * @return: integer indicate the week of the year.
+      */
       function get_week(&$date) {
             $date_o = new DateTime($date);
             $week  =  $date_o->format("W");
             return $week;
       }
 
+      /**
+      *  @param: $date type date
+      *  @return: the first letter of a day.
+      */
       function get_day(&$date) {
             $date_o      = new DateTime($date);
             $d           = $date_o->format("D");
             return get_day_letter($d);
       }
 
-
+      /**
+      * @param: $day string
+      * @return: the first char of the day.
+      *
+      */
       function get_day_letter($day) {
             if ($day == "Mon") return "M";
             if ($day == "Tue") return "T";
@@ -43,9 +54,9 @@
             return " ";
       }
 
-      /*
+      /**
       * @param: string of time exmple "11:00:00"
-      * @return: the coorect index on the schedule
+      * @return: the corressponding index on the schedule
       */
       function set_time_coordinate(&$time) {
           if ($time >= "08:00:00" && $time < "09:00:00")   return 0;
@@ -66,7 +77,7 @@
       }
 
 
-      /*
+      /**
       * @param: a charachter of days
       * @return: the coorect index on the schedule
       */
@@ -80,6 +91,14 @@
             return 6;
       }
 
+      /**
+      * @param: $schedule: 2d array represent the schedule
+      * @param: $title: title of am element.
+      * @param: $start:the starting time.
+      * @param: $end: the end time.
+      * @days: the days of the events.
+      *
+      */
       function set_schedule(&$schedule, $title, $start, $end, $days) {
 
             $start_coord =  set_time_coordinate($start);
@@ -97,7 +116,10 @@
       }
 
 
-
+      /**
+      * set the courses on the schedule
+      * @param: $schedule 2d array that represent the weekly schedule
+      */
       function create_course_schedule(&$schedule) {
             global $res;
 
@@ -110,16 +132,20 @@
             }
 
       }
-
+      /**
+      * set the events on the schedule
+      * @param: $schedule 2d array that represent the weekly schedule
+      */
       function create_event_schedule(&$schedule) {
             global $res_event;
+            global $system_week;
             for($i = 0; $i < count($res_event); $i++) {
                   $title      = $res_event[$i]['TITLE'];
                   $start      = $res_event[$i]['START_FROM'];
                   $end        = $res_event[$i]['END_AT'];
                   $date       = $res_event[$i]['BUSYDATE'];
                   $event_week = get_week($date);
-                  if (strcmp($event_week, $system_week)) {
+                  if (strcmp("$event_week", "$system_week") == 0) {
                         $day = get_day($date);
                         set_schedule($schedule, $title, $start, $end, $day);
                   }
@@ -127,14 +153,14 @@
 
       }
 
+      /**
+      * create the schedule: set the events and the courses on the schedule.
+      */
       function create_schedule() {
             $schedule;
             create_course_schedule($schedule);
             create_event_schedule($schedule);
             return $schedule;
       }
-
-      $schedule = create_schedule();
-      $schedule[0][3];
 
 ?>

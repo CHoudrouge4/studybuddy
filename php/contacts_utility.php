@@ -1,7 +1,10 @@
 <?php
-
+      //include the data base.
       require_once "database.php";
-
+      /**
+      * @param: $id the user id to get his contacts
+      * @return: Array that contains the contacts table.
+      */
       function get_contacts_query($id) {
             $db = new database();
             $stmt = "SELECT USER2ID from CONTACTLIST where USER1ID = '$id'";
@@ -9,10 +12,19 @@
             return $db->select($stmt);
       }
 
+      /**
+      * @param: $id the user id to get his contacts
+      * @return: Array that contains the contacts table.
+      */
       function get_contacts($id) {
             return get_contacts_query($id);
       }
 
+      /**
+      * print the cintacts in an html format
+      * @param: $contacts array of the contacs
+      *
+      */
       function print_contacts_to_html(&$contacts) {
 
             for($i = 0; $i < count($contacts); $i++) {

@@ -1,5 +1,5 @@
 <?php
-      /*
+      /**
       *    @param: email the email of the reciever, $message the message the he/she will recieved
       *    @return true if the email is sent false otherwize.
       */

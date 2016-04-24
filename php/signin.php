@@ -5,12 +5,11 @@
       *    algorithm to sign in.
       *
       */
-      //include the database connection
-      require_once "database.php";
-      require_once "inputverification.php";
 
-      $db = new database();
-      //$db->connect();
+
+      require_once "inputverification.php";           //include the input verification file (contains function that check the if the inputs are valid)
+
+                                //create a database object
 
       if(isset($_POST['sign_in_button'])) {
 
@@ -28,15 +27,29 @@
 
             }
 
+            // check if the user didn t enter his email
             if (empty($email) || empty($password)) {
                   $sign_in_error = "can't leave some fields empty";
-            } else if (!valid_email($email)) {
+            } else if (!valid_email($email)) {  //check if the email is an valid email according to the function in input ferification
                   $sign_in_error = "mail not valid";
             } else {
-                  $res = $db->select("SELECT password, confirmed FROM USER WHERE EMAIL = 'hah51@mail.aub.edu'");  //get the password and confirmed
 
-                  if (strcmp($res[0]['password'],$password) !== 0) { //check pass
-                        if(strcmp($res[0]['confirmed'],"1")) { //check confirmed
+                  $host = "127.0.0.1";
+                  $dbuser = "study_buddy_db";
+                  $pass = "study_buddy_choudrouge4";// enter ur database password.
+                  $dname = "study_buddy";
+                  $connection = mysqli_connect($host,$dbuser,$pass,$dname);
+                  if(mysqli_connect_errno()) {
+                      die("Connection Failed!" . mysqli_connect_error());
+                  }
+                  $stmt = "SELECT PASSWORD, confirmed FROM USER WHERE EMAIL = '$email'";
+                  $res = mysqli_query($connection, $stmt);
+                  $row = mysqli_fetch_assoc($res);
+                  $pass = $row['PASSWORD'];
+                  $conf = $row['confirmed'];
+            
+                  if ((strcmp($pass, "$password") === 0) == 1) { //check pass
+                        if((strcmp($conf,'1') === 0) == 1) { //check confirmed
                               session_start();
                               $_SESSION["email"] = $email;
                               header('Location: ./php/profile.php'); //direct user to profile

@@ -1,7 +1,9 @@
 <?php
 
-      /* include the file that contain the function that check the validation of the input
-      *  the input that validate the requirements.
+      /* inputverification.php contains the function that check the validation of the input before signing up.
+       *    (the input that validate the requirements).
+       * signin.php: the file that performes the signin action.
+       * forget_password.php : the file that performes the recovery password action.
        */
       require "./php/inputverification.php";
       require "./php/signin.php";
@@ -14,13 +16,11 @@
         <title>Welcome to Study Buddy</title>
         <link rel="stylesheet" type="text/css" href="CSS/grid-reset.css">
         <link rel="stylesheet" type="text/css" href="CSS/style.css">
-        <!--<script src="Script/datamanip.js"></script>-->
         <script src = "Script/styling.js"></script>
         <script src = "Script/classie.js"></script>
     </head>
 
     <body>
-
 
            <header class="clearfix">
             <a href="#" class="logo"><img src="Image/StudyBuddy_Logo.jpg"></a>
@@ -37,7 +37,7 @@
                         <h1>Sign In</h1>
                         <?php
                                     /**
-                                    *     print the error msg if it is set.
+                                    *     print the signin error massege if it is set.
                                     *
                                     */
                                   if(isset($sign_in_error) && $sign_in_error) {
@@ -66,6 +66,9 @@
                     <form method = "POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" accept-charset="UTF-8">
 
                         <?php
+                              /*
+                              * print the sign up error message.
+                              */
                             if(isset($errorMsg) && $errorMsg) {
                                 echo "<p style=\"color: red;\">*",htmlspecialchars($errorMsg),"</p>\n\n";
                             }

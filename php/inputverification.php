@@ -1,9 +1,9 @@
 <?php
 
-    /*
+    /**
     * @param: string name
-    * @return true if the name validate the following condition flase otherwize
-    * -name: contain only letter no number length less than 50;
+    * @return true if the name validate the following condition false otherwize
+    * -name: contain only letter (no number), and its length less than 50;
     *
     */
     function valid_name($name) {
@@ -11,17 +11,17 @@
         return strlen($name) <= 50 && ctype_alpha($name);
     }
 
-    /*
+    /**
     * @param: string password
-    * @return true if the password validate the following condition else otherwize
-    *  password should be more the 8 charachters, contain letter and digits,
+    * @return true if the password validate the following condition false otherwize
+    *  password should be more than 8 charachters, contain letter and digits,
     */
     function valid_pasword($password) {
         // length is less than 100, greater than 8, and contain only letter.
         return strlen($password) <= 100 && strlen($password) > 8 && ctype_alpha($password) == false;
     }
 
-    /*
+    /**
     * @param string email
     * @return true if email satisfy the following condition false otherwize
     *  email should be aub mail for student, it has the form abc00@mail.aub.edu or
@@ -55,11 +55,11 @@
     // form handler check if everything is setted.
     if($_POST && isset($_POST['submit_button'], $_POST['first_name'], $_POST['last_name'], $_POST['aub_mail'], $_POST['sign_up_password'], $_POST['sign_up_password_confirmation'])) {
 
-      $first_name = $_POST['first_name'];
-      $last_name  = $_POST['last_name'];
-      $email = $_POST['aub_mail'];
-      $password = $_POST['sign_up_password'];
-      $password_confirmation = $_POST['sign_up_password_confirmation'];
+      $first_name = $_POST['first_name'];                                     //get the first name from the form using the post method
+      $last_name  = $_POST['last_name'];                                      //get the last name from the form using the post method
+      $email = $_POST['aub_mail'];                                            // get the email from the form using the post method
+      $password = $_POST['sign_up_password'];                                 // get the sign up password from the form using the post method
+      $password_confirmation = $_POST['sign_up_password_confirmation'];       // get the sign up confirmation password using the post method
 
       /*
       *  check all  the valid condition, and set the error message
