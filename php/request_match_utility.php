@@ -13,7 +13,8 @@
       * @param: $day the day of the request
       * @return: the result in a querry
       */
-      function request($course_title, $start_from, $end_at, $day) {
+      function request($course_title, $start_from, $end_at, $day, $date) {
+
             $db = new database();
             $drop_prev_conflict_view = "drop view if exists conflicted_courses";
             $create_conflict_view   =  "create view conflicted_courses As SELECT COURSEID from COURSE where START_FROM >= '$start_from'  AND END_AT <= '$end_at' AND DAYS LIKE '%$day%'";
@@ -31,7 +32,9 @@
             $create_enrollement_conflict_view = "create view enrolled_conflict as SELECT usr.USERID, usr.FIRSTNAME, usr.LASTNAME, usr.EMAIL from USER usr, ENROLLEMENT enr, conflicted_courses con where usr.USERID = enr.USERID AND enr.COURSEID = con.COURSEID";
             $db->query($drop_enrollement_conflict);
             $db->query($create_enrollement_conflict_view);
-            $suggested = "SELECT sg.USERID, sg.FIRSTNAME, sg.LASTNAME, sg.EMAIL FROM pseudosuggested sg LEFT JOIN enrolled_conflict ec on sg.USERID = ec.USERID WHERE ec.USERID IS NULL";
+      //      $suggested = "SELECT sg.USERID, sg.FIRSTNAME, sg.LASTNAME, sg.EMAIL FROM pseudosuggested sg LEFT JOIN enrolled_conflict ec on sg.USERID = ec.USERID WHERE ec.USERID IS NULL";
+      $suggested = "SELECT sg.USERID, sg.FIRSTNAME, sg.LASTNAME, sg.EMAIL FROM pseudosuggested sg LEFT JOIN enrolled_conflict ec on sg.USERID = ec.USERID LEFT JOIN BUSY bs ON sg.USERID = bs.USERID AND bs.BUSYDATE = '$date' AND bs.START_FROM >= '$start_from' AND bs.END_AT <= '$end_at'  WHERE ec.USERID IS NULL AND bs.USERID IS NULL;
+";
             //echo $suggested;
             //$seg = "SELECT * FROM USER";
             return $db->query($suggested);
@@ -51,5 +54,6 @@
             }
             return $table;
       }
+
 
 ?>

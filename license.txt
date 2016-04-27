@@ -1,3 +1,10 @@
+studybuddy 1.0, Copyright (C) 2016  name of Hussein Houdrouge, Leimera Hala chehab,
+ kafa Alameh, and Mickeal Abou Nabhan
+   studybuddy 1.0 comes with ABSOLUTELY NO WARRANTY;
+   This is free software, and you are welcome to redistribute it
+   under certain conditions;
+
+
                   GNU GENERAL PUBLIC LICENSE
                      Version 3, 29 June 2007
 

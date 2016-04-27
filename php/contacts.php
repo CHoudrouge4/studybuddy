@@ -26,7 +26,7 @@
         </div>
         <br>
 <?php
-      // print the contacts 
+      // print the contacts
       print_contacts_to_html($contacts);
 
 ?>

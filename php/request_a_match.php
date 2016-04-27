@@ -17,7 +17,7 @@
                 } else {
                       echo $date;
                        require "request_match_utility.php";
-                        $res   = request($course, $start_from, $end_at, $day);  //get the result
+                        $res   = request($course, $start_from, $end_at, $day, $date);  //get the result
                         $table = create_result($res);                           // creat a table for the result
                         $_SESSION['course_title'] = $course;
                         $_SESSION['time_from']    = $start_from;

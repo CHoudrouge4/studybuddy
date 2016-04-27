@@ -33,7 +33,11 @@
             } else if (!valid_email($email)) {  //check if the email is an valid email according to the function in input ferification
                   $sign_in_error = "mail not valid";
             } else {
-
+                  /*
+                  * I obliged to create a new connection, since the data base object didn't
+                  * work here for non obvious reason (Hussein Houdrouge).
+                  *
+                  */
                   $host = "127.0.0.1";
                   $dbuser = "study_buddy_db";
                   $pass = "study_buddy_choudrouge4";// enter ur database password.
@@ -47,7 +51,7 @@
                   $row = mysqli_fetch_assoc($res);
                   $pass = $row['PASSWORD'];
                   $conf = $row['confirmed'];
-            
+
                   if ((strcmp($pass, "$password") === 0) == 1) { //check pass
                         if((strcmp($conf,'1') === 0) == 1) { //check confirmed
                               session_start();

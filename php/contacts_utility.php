@@ -36,7 +36,7 @@
                       <h4> $first_name $last_name</h4>
                       <a target='_blank' href='mailto:$email?subject=Studdy Buddy
           &body=Hello!%0D%0AI%20found%20you%20through%20Studdy%20Buddy,%20and%20I%20was%20hoping%20you%20would%20meet%20with%20me%20to%20study!%0D%0AClick%20this%20link%20to%20sign%20in%20and%20give%20a%20reply!%0D%0Astudybuddy.com/login'>
-                      <img class = 'cont_img' src = '../Image/@.jpg'></a>
+                      <img class = 'cont_img' src = '../Image/@.svg'></a>
                   </div>";
             }
 
